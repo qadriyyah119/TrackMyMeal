@@ -13,11 +13,13 @@ class MealListItem {
   
   var name: String
   var calories: Int
+  var category: MealCategory
   
   // MARK: - Initialization
   
-  init(name: String, calories: Int) {
+  init(name: String, calories: Int, category: MealCategory) {
     self.name = name
     self.calories = calories
+    self.category = category
   }
 }
