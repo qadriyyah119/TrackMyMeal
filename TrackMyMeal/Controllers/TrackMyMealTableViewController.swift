@@ -29,6 +29,9 @@ class TrackMyMealTableViewController: UITableViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.separatorColor = UIColor(red: 0.77, green: 0.27, blue: 0.41, alpha: 1.00)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+      
+      // Register my custom header view
+      tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         
     }
     
@@ -62,6 +65,10 @@ class TrackMyMealTableViewController: UITableViewController {
       }
         return title
     }
+  
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader")
+  }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
@@ -98,11 +105,6 @@ class TrackMyMealTableViewController: UITableViewController {
         cell.mealTextLabel.text = meal.name
         cell.calorieLabel.text = String(meal.calories)
       }
-        //let meal = mealList.meals[indexPath.row]
-        
-//        cell.mealTextLabel.text = meal.name
-//        cell.calorieLabel.text = String(meal.calories)
-        
         
         cell.backgroundColor = UIColor.clear
         cell.mealTextLabel.textColor = UIColor.white
