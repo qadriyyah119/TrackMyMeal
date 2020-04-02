@@ -46,8 +46,11 @@ class MealList {
   
   func mealSectionList(for mealCategory: MealCategory) -> [MealListItem] {
         return meals.filter { $0.category == mealCategory }
- 
   }
   
+  func mealCalorieList(for mealCategory: MealCategory) -> Int {
+    let meals = mealSectionList(for: mealCategory)
+    return meals.reduce(0) {$0 + ($1.calories)}
+  }
   
 }
