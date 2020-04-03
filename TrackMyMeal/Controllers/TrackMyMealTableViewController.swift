@@ -47,24 +47,7 @@ class TrackMyMealTableViewController: UITableViewController {
         
         return MealCategory.allCases.count
     }
-    
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        var title: String? = nil
-//
-//      if let sectionTitle = sectionForMealIndex(section){
-//        switch sectionTitle{
-//        case .breakfast:
-//          title = "Breakfast"
-//        case .lunch:
-//          title = "Lunch"
-//        case .dinner:
-//          title = "Dinner"
-//        case .snack:
-//          title = "Snack"
-//        }
-//      }
-//        return title
-//    }
+
   
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as? SectionHeader else {
@@ -74,19 +57,10 @@ class TrackMyMealTableViewController: UITableViewController {
     var title: String = ""
     var calorieTotal: Int = 0
     
-    if let sectionTitle = sectionForMealIndex(section){
-      switch sectionTitle{
-      case .breakfast:
-        title = "Breakfast"
-      case .lunch:
-        title = "Lunch"
-      case .dinner:
-        title = "Dinner"
-      case .snack:
-        title = "Snack"
-      }
+    if let sectionCategory = sectionForMealIndex(section){
+        title = sectionCategory.mealName
       
-      calorieTotal = mealList.mealCalorieList(for: sectionTitle)
+      calorieTotal = mealList.mealCalorieList(for: sectionCategory)
     }
     
     view.title.text = title
@@ -124,8 +98,8 @@ class TrackMyMealTableViewController: UITableViewController {
             fatalError("Fatal Error Test")
         }
         
-      if let sectionTitle = sectionForMealIndex(indexPath.section) {
-        let meals = mealList.mealSectionList(for: sectionTitle)
+      if let sectionCategory = sectionForMealIndex(indexPath.section) {
+        let meals = mealList.mealSectionList(for: sectionCategory)
         let meal = meals[indexPath.row]
         
         cell.mealTextLabel.text = meal.name

@@ -10,7 +10,16 @@ import Foundation
 
 
 enum MealCategory: Int, CaseIterable {
-  case breakfast = 0, lunch, dinner, snack
+    case breakfast = 0, lunch, dinner, snack
+    
+    var mealName: String {
+        switch self {
+        case .breakfast: return "Breakfast"
+        case .lunch: return "Lunch"
+        case .dinner: return "Dinner"
+        case .snack: return "Snack"
+        }
+    }
 }
 
 class MealList {
