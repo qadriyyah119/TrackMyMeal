@@ -18,6 +18,7 @@
 		184C6B1A2416E6C600BD8399 /* MealListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B192416E6C600BD8399 /* MealListItem.swift */; };
 		184C6B1C2417250700BD8399 /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B1B2417250700BD8399 /* MealCell.swift */; };
 		185A979C243641D000D704C7 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A979B243641CF00D704C7 /* SectionHeader.swift */; };
+		18FCE49B243BB89A00FE430B /* AddNewMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		184C6B192416E6C600BD8399 /* MealListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListItem.swift; sourceTree = "<group>"; };
 		184C6B1B2417250700BD8399 /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
 		185A979B243641CF00D704C7 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMealViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				184C6B152416E36D00BD8399 /* TrackMyMealTableViewController.swift */,
+				18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				184C6B1C2417250700BD8399 /* MealCell.swift in Sources */,
 				184C6B062416D47800BD8399 /* ViewController.swift in Sources */,
 				185A979C243641D000D704C7 /* SectionHeader.swift in Sources */,
+				18FCE49B243BB89A00FE430B /* AddNewMealViewController.swift in Sources */,
 				184C6B182416E3C300BD8399 /* MealList.swift in Sources */,
 				184C6B022416D47800BD8399 /* AppDelegate.swift in Sources */,
 				184C6B042416D47800BD8399 /* SceneDelegate.swift in Sources */,

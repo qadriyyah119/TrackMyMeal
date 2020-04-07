@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urI-Y5-tCH">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urI-Y5-tCH">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,6 +61,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="9eW-gf-Kvp">
                             <connections>
                                 <action selector="addMeal:" destination="Vzz-Jc-I8M" id="9hB-kx-owZ"/>
+                                <segue destination="7wr-gl-G9k" kind="show" id="zxR-pS-ReS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -67,6 +69,134 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miN-J8-Vg8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="307.24637681159425" y="138.61607142857142"/>
+        </scene>
+        <!--New Meal-->
+        <scene sceneID="L2A-gR-jUq">
+            <objects>
+                <viewController id="7wr-gl-G9k" customClass="AddNewMealViewController" customModule="TrackMyMeal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rGw-Vb-BAI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" id="7d7-dA-Yn3">
+                                <rect key="frame" x="20" y="136" width="374" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-oS-AtY">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="82"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-Bt-Eq5">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Calories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zsa-Cr-kPH">
+                                                <rect key="frame" x="0.0" y="48" width="374" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="g5o-1a-b60">
+                                        <rect key="frame" x="0.0" y="96" width="374" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gT-sI-rcq">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="162" id="7Eg-Fm-4l7"/>
+                                                    <constraint firstAttribute="height" constant="45" id="P2L-X5-Wyx"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                                <state key="normal" title="Breakfast">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="4jD-wo-jfQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCz-Or-eT0">
+                                                <rect key="frame" x="212" y="0.0" width="162" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="162" id="8H5-Kb-dKf"/>
+                                                    <constraint firstAttribute="height" constant="45" id="Kev-Up-f16"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                                <state key="normal" title="Lunch">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="mKY-8J-44b"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="kC1-Lb-wP4">
+                                        <rect key="frame" x="0.0" y="155" width="374" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaM-T6-Te7">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="162" id="MCw-Ca-eBN"/>
+                                                    <constraint firstAttribute="height" constant="45" id="sjA-1b-cpH"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                                <state key="normal" title="Dinner">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="Pnc-IQ-6RH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eY1-QC-iQT">
+                                                <rect key="frame" x="212" y="0.0" width="162" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="4sX-pd-Ds6"/>
+                                                    <constraint firstAttribute="width" constant="162" id="w2a-uP-jCI"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
+                                                <state key="normal" title="Snack">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="LD4-3m-SC6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="feC-ni-OdK"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Meal" id="Weh-Sp-Jah">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qBB-Ar-4i1">
+                            <connections>
+                                <action selector="cancel:" destination="7wr-gl-G9k" id="hvd-fp-xhk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="neW-pB-Prb">
+                            <connections>
+                                <action selector="save:" destination="7wr-gl-G9k" id="0l2-yT-xqA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="calorieTextField" destination="Zsa-Cr-kPH" id="CJd-kM-AJR"/>
+                        <outlet property="mealNameTextField" destination="RAf-Bt-Eq5" id="cLf-eJ-nqI"/>
+                        <outletCollection property="mealCategoryButtons" destination="8gT-sI-rcq" collectionClass="NSMutableArray" id="g2b-hV-ZjZ"/>
+                        <outletCollection property="mealCategoryButtons" destination="pCz-Or-eT0" collectionClass="NSMutableArray" id="OOY-a5-4p8"/>
+                        <outletCollection property="mealCategoryButtons" destination="YaM-T6-Te7" collectionClass="NSMutableArray" id="bI8-af-SEt"/>
+                        <outletCollection property="mealCategoryButtons" destination="eY1-QC-iQT" collectionClass="NSMutableArray" id="ijT-0s-pNc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dak-2f-ECr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1108.6956521739132" y="138.61607142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0mW-hY-hbs">
