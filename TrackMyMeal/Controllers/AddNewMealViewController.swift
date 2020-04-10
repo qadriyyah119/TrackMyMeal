@@ -8,8 +8,18 @@
 
 import UIKit
 
+// Any viewController that wants to get a new meal entry back must implement this protocol
+protocol AddNewMealViewDelegate: class {
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem)
+}
+
 class AddNewMealViewController: UIViewController {
   
+  // any viewController that implements this protocol can be a delegate of the AddNewMealViewController
+  weak var delegate: AddNewMealViewDelegate?
+  
+  @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+  @IBOutlet weak var addBarButton: UIBarButtonItem!
   @IBOutlet weak var mealNameTextField: UITextField!
   @IBOutlet weak var calorieTextField: UITextField!
   @IBOutlet var mealCategoryButtons: [UIButton]!
@@ -21,6 +31,7 @@ class AddNewMealViewController: UIViewController {
   
   
   @IBAction func cancel(_ sender: Any) {
+    navigationController?.popViewController(animated: true)
   }
   
   @IBAction func save(_ sender: Any) {

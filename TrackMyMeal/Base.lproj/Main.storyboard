@@ -186,7 +186,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBarButton" destination="neW-pB-Prb" id="aUy-yJ-KYG"/>
                         <outlet property="calorieTextField" destination="Zsa-Cr-kPH" id="CJd-kM-AJR"/>
+                        <outlet property="cancelBarButton" destination="qBB-Ar-4i1" id="KTZ-5Q-Rfz"/>
                         <outlet property="mealNameTextField" destination="RAf-Bt-Eq5" id="cLf-eJ-nqI"/>
                         <outletCollection property="mealCategoryButtons" destination="8gT-sI-rcq" collectionClass="NSMutableArray" id="g2b-hV-ZjZ"/>
                         <outletCollection property="mealCategoryButtons" destination="pCz-Or-eT0" collectionClass="NSMutableArray" id="OOY-a5-4p8"/>

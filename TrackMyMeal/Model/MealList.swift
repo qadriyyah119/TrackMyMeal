@@ -61,5 +61,10 @@ class MealList {
     let meals = mealSectionList(for: mealCategory)
     return meals.reduce(0) {$0 + ($1.calories)}
   }
+    
+    func newMeal() -> {
+        let item = MealListItem()
+        
+    }
   
 }
