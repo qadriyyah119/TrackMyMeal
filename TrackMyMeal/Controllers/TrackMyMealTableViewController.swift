@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrackMyMealTableViewController: UITableViewController {
+class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDelegate {
     
     var mealList: MealList
   
@@ -119,14 +119,18 @@ class TrackMyMealTableViewController: UITableViewController {
     @IBAction func addMeal(_ sender: Any) {
         print("Added Item")
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewMealEntrySegue" {
+            let destination = segue.destination as? AddNewMealViewController
+            destination?.delegate = self
+        }
+    }
+    
+    func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem) {
+        mealList.meals.append(meal)
+        tableView.reloadData()
+        navigationController?.popViewController(animated: true)
+    }
 }
+     

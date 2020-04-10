@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urI-Y5-tCH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urI-Y5-tCH">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,7 +61,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="9eW-gf-Kvp">
                             <connections>
                                 <action selector="addMeal:" destination="Vzz-Jc-I8M" id="9hB-kx-owZ"/>
-                                <segue destination="7wr-gl-G9k" kind="show" id="zxR-pS-ReS"/>
+                                <segue destination="7wr-gl-G9k" kind="show" identifier="NewMealEntrySegue" id="zxR-pS-ReS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -112,6 +112,7 @@
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="didTapBreakfast:" destination="7wr-gl-G9k" eventType="touchUpInside" id="i26-SS-tUU"/>
                                                     <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="4jD-wo-jfQ"/>
                                                 </connections>
                                             </button>
@@ -186,12 +187,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBarButton" destination="neW-pB-Prb" id="aUy-yJ-KYG"/>
                         <outlet property="calorieTextField" destination="Zsa-Cr-kPH" id="CJd-kM-AJR"/>
+                        <outlet property="cancelBarButton" destination="qBB-Ar-4i1" id="KTZ-5Q-Rfz"/>
                         <outlet property="mealNameTextField" destination="RAf-Bt-Eq5" id="cLf-eJ-nqI"/>
-                        <outletCollection property="mealCategoryButtons" destination="8gT-sI-rcq" collectionClass="NSMutableArray" id="g2b-hV-ZjZ"/>
-                        <outletCollection property="mealCategoryButtons" destination="pCz-Or-eT0" collectionClass="NSMutableArray" id="OOY-a5-4p8"/>
-                        <outletCollection property="mealCategoryButtons" destination="YaM-T6-Te7" collectionClass="NSMutableArray" id="bI8-af-SEt"/>
-                        <outletCollection property="mealCategoryButtons" destination="eY1-QC-iQT" collectionClass="NSMutableArray" id="ijT-0s-pNc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dak-2f-ECr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
