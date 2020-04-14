@@ -128,8 +128,13 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     }
     
     func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem) {
-        mealList.meals.append(meal)
-        tableView.reloadData()
+//        mealList.meals.append(meal)
+//        tableView.reloadData()
+      if let sectionCategory = sectionForMealIndex(meal.category.rawValue) {
+        let rowIndex = 
+      }
+      
+      
         navigationController?.popViewController(animated: true)
     }
 }
