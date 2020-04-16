@@ -24,15 +24,30 @@ class AddNewMealViewController: UIViewController {
   @IBOutlet weak var addBarButton: UIBarButtonItem!
   @IBOutlet weak var mealNameTextField: UITextField!
   @IBOutlet weak var calorieTextField: UITextField!
+
+  @IBOutlet var mealCategoryButtons: [UIButton]!
   
   @IBAction func selectMealCategory(_ sender: UIButton) {
+    mealCategoryButtons.forEach({ $0.backgroundColor = UIColor.white })
     
+    sender.backgroundColor = UIColor(red: 0.77, green: 0.27, blue: 0.41, alpha: 1.00)
   }
   
-    @IBAction func didTapBreakfast(_ sender: UIButton) {
-        mealCategory = .breakfast
-    }
+  @IBAction func didTapBreakfast(_ sender: UIButton) {
+    mealCategory = .breakfast
     
+  }
+  @IBAction func didTapLunch(_ sender: UIButton) {
+    mealCategory = .lunch
+  }
+  @IBAction func didTapDinner(_ sender: UIButton) {
+    mealCategory = .dinner
+    
+  }
+  @IBAction func didTapSnack(_ sender: UIButton) {
+    mealCategory = .snack
+  }
+  
   
   @IBAction func cancel(_ sender: Any) {
     navigationController?.popViewController(animated: true)
@@ -52,6 +67,9 @@ class AddNewMealViewController: UIViewController {
         super.viewDidLoad()
     
     view.backgroundColor = UIColor.darkGray
+    
+    
+    
 
     }
 
