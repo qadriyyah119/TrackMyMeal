@@ -94,6 +94,9 @@
                                                 <rect key="frame" x="0.0" y="48" width="374" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="calorieTextFieldKeyboard:" destination="7wr-gl-G9k" eventType="editingDidBegin" id="fbl-5y-Sf1"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>

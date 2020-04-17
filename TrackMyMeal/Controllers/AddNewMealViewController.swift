@@ -62,6 +62,11 @@ class AddNewMealViewController: UIViewController {
     delegate?.addNewMealViewController(self, didFinishAdding: mealListItem)
   }
   
+  @IBAction func calorieTextFieldKeyboard(_ sender: Any) {
+    calorieTextField.keyboardType = UIKeyboardType.numberPad
+  }
+  
+  
   
   override func viewDidLoad() {
         super.viewDidLoad()
