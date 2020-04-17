@@ -33,12 +33,13 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       // Register my custom header view
       tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         
+        mealList = MealList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        mealList = MealList()
+        
     }
     
     // MARK: - TableView DataSource
@@ -134,8 +135,9 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       if let sectionCategory = sectionForMealIndex(meal.category.rawValue) {
         let newIndexPath = IndexPath(row: mealList.mealSectionList(for: sectionCategory).count, section: sectionCategory.rawValue)
         mealList.meals.append(meal)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-
+        tableView.beginUpdates()
+        tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
+        tableView.endUpdates()
       }
         navigationController?.popViewController(animated: true)
     }
