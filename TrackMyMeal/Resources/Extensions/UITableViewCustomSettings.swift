@@ -8,14 +8,13 @@
 
 import UIKit
 
-class UITableViewCustomSettings: UIView {
+extension UITableView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+  func addTableViewDesignSettings() {
+    backgroundColor = Theme.backgroundColor
+    layoutMargins = UIEdgeInsets.zero
+    separatorInset = UIEdgeInsets.zero
+    separatorColor = Theme.accentColor
+    tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+  }
 }

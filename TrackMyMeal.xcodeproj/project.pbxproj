@@ -18,6 +18,12 @@
 		184C6B1A2416E6C600BD8399 /* MealListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B192416E6C600BD8399 /* MealListItem.swift */; };
 		184C6B1C2417250700BD8399 /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B1B2417250700BD8399 /* MealCell.swift */; };
 		185A979C243641D000D704C7 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A979B243641CF00D704C7 /* SectionHeader.swift */; };
+		189DEDEC2450A77D00791165 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 189DEDEB2450A77D00791165 /* Colors.xcassets */; };
+		189DEDEF2450ABC000791165 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189DEDEE2450ABC000791165 /* UIViewShadowExtension.swift */; };
+		189DEDF12450AE8000791165 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189DEDF02450AE8000791165 /* Theme.swift */; };
+		189DEDF32450B07C00791165 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 189DEDF22450B07B00791165 /* Montserrat-Light.ttf */; };
+		189DEDF52450B0AA00791165 /* PlayfairDisplay-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 189DEDF42450B0AA00791165 /* PlayfairDisplay-VariableFont_wght.ttf */; };
+		189DEDF72450B8FB00791165 /* UITableViewCustomSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189DEDF62450B8FB00791165 /* UITableViewCustomSettings.swift */; };
 		18FCE49B243BB89A00FE430B /* AddNewMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +41,12 @@
 		184C6B192416E6C600BD8399 /* MealListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListItem.swift; sourceTree = "<group>"; };
 		184C6B1B2417250700BD8399 /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
 		185A979B243641CF00D704C7 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		189DEDEB2450A77D00791165 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		189DEDEE2450ABC000791165 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewShadowExtension.swift; sourceTree = "<group>"; };
+		189DEDF02450AE8000791165 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		189DEDF22450B07B00791165 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		189DEDF42450B0AA00791165 /* PlayfairDisplay-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		189DEDF62450B8FB00791165 /* UITableViewCustomSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCustomSettings.swift; sourceTree = "<group>"; };
 		18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMealViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +80,7 @@
 		184C6B002416D47800BD8399 /* TrackMyMeal */ = {
 			isa = PBXGroup;
 			children = (
+				189DEDEA2450A73800791165 /* Resources */,
 				184C6B012416D47800BD8399 /* AppDelegate.swift */,
 				184C6B032416D47800BD8399 /* SceneDelegate.swift */,
 				184C6B1D2417E23B00BD8399 /* Model */,
@@ -107,6 +120,27 @@
 				18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		189DEDEA2450A73800791165 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				189DEDED2450AA3500791165 /* Extensions */,
+				189DEDEB2450A77D00791165 /* Colors.xcassets */,
+				189DEDF22450B07B00791165 /* Montserrat-Light.ttf */,
+				189DEDF42450B0AA00791165 /* PlayfairDisplay-VariableFont_wght.ttf */,
+				189DEDF02450AE8000791165 /* Theme.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		189DEDED2450AA3500791165 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				189DEDEE2450ABC000791165 /* UIViewShadowExtension.swift */,
+				189DEDF62450B8FB00791165 /* UITableViewCustomSettings.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,8 +201,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189DEDF32450B07C00791165 /* Montserrat-Light.ttf in Resources */,
 				184C6B0E2416D49200BD8399 /* LaunchScreen.storyboard in Resources */,
+				189DEDEC2450A77D00791165 /* Colors.xcassets in Resources */,
 				184C6B0B2416D49200BD8399 /* Assets.xcassets in Resources */,
+				189DEDF52450B0AA00791165 /* PlayfairDisplay-VariableFont_wght.ttf in Resources */,
 				184C6B092416D47800BD8399 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,11 +221,14 @@
 				184C6B1A2416E6C600BD8399 /* MealListItem.swift in Sources */,
 				184C6B1C2417250700BD8399 /* MealCell.swift in Sources */,
 				184C6B062416D47800BD8399 /* ViewController.swift in Sources */,
+				189DEDF12450AE8000791165 /* Theme.swift in Sources */,
 				185A979C243641D000D704C7 /* SectionHeader.swift in Sources */,
 				18FCE49B243BB89A00FE430B /* AddNewMealViewController.swift in Sources */,
+				189DEDEF2450ABC000791165 /* UIViewShadowExtension.swift in Sources */,
 				184C6B182416E3C300BD8399 /* MealList.swift in Sources */,
 				184C6B022416D47800BD8399 /* AppDelegate.swift in Sources */,
 				184C6B042416D47800BD8399 /* SceneDelegate.swift in Sources */,
+				189DEDF72450B8FB00791165 /* UITableViewCustomSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

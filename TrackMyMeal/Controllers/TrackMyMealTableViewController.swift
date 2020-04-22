@@ -23,12 +23,8 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
   }
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        tableView.backgroundColor = UIColor.darkGray
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorInset = UIEdgeInsets.zero
-        tableView.separatorColor = UIColor(red: 0.77, green: 0.27, blue: 0.41, alpha: 1.00)
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+      
+      tableView.addTableViewDesignSettings()
       
       // Register my custom header view
       tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
@@ -107,10 +103,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         cell.mealTextLabel.text = meal.name
         cell.calorieLabel.text = String(meal.calories)
       }
-        
-        cell.backgroundColor = UIColor.clear
-        cell.mealTextLabel.textColor = UIColor.white
-        cell.calorieLabel.textColor = UIColor.white
         
         return cell
     }
