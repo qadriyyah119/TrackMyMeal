@@ -16,8 +16,9 @@ class SectionHeader: UITableViewHeaderFooterView {
   override init(reuseIdentifier: String?) {
     super.init(reuseIdentifier: reuseIdentifier)
     self.backgroundView?.backgroundColor = Theme.headerColor
-    title.font = UIFont(name: Theme.mainFontName, size: 19)
-    calorieCount.font = UIFont(name: Theme.mainFontName, size: 19)
+    self.addShadowandRoundedCorners()
+    title.font = UIFont(name: Theme.mainFontName, size: 17)
+    calorieCount.font = UIFont(name: Theme.mainFontName, size: 17)
     configureContents()
   }
   

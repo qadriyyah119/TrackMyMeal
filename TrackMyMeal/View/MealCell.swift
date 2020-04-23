@@ -18,8 +18,8 @@ class MealCell: UITableViewCell {
         // Initialization code
       
       self.backgroundColor = UIColor.clear
-      mealTextLabel.font = UIFont(name: Theme.mainFontName, size: 18)
-      calorieLabel.font = UIFont(name: Theme.mainFontName, size: 18)
+      mealTextLabel.font = UIFont(name: Theme.mainFontName, size: 16)
+      calorieLabel.font = UIFont(name: Theme.mainFontName, size: 16)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
