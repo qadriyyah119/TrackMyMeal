@@ -20,17 +20,28 @@ class AddNewMealViewController: UIViewController {
     
     private var mealCategory: MealCategory?
   
-  @IBOutlet weak var cancelBarButton: UIBarButtonItem!
-  @IBOutlet weak var addBarButton: UIBarButtonItem!
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var addButton: UIButton!
   @IBOutlet weak var mealNameTextField: UITextField!
   @IBOutlet weak var calorieTextField: UITextField!
 
   @IBOutlet var mealCategoryButtons: [UIButton]!
   
+  override func viewDidLoad() {
+      super.viewDidLoad()
+      
+    cancelButton.createFloatingActionButton()
+    addButton.createFloatingActionButton()
+    titleLabel.font = UIFont(name: Theme.titleFontName, size: 25)
+    mealCategoryButtons.forEach({ $0.addMealButtonSettings()})
+  }
+  
   @IBAction func selectMealCategory(_ sender: UIButton) {
-    mealCategoryButtons.forEach({ $0.backgroundColor = UIColor.white })
+    mealCategoryButtons.forEach({ $0.backgroundColor = UIColor.white; $0.setTitleColor(UIColor.black, for: .normal)})
     
-    sender.backgroundColor = UIColor(red: 0.77, green: 0.27, blue: 0.41, alpha: 1.00)
+    sender.backgroundColor = Theme.tintColor
+    sender.setTitleColor(UIColor.white, for: .normal)
   }
   
   @IBAction func didTapBreakfast(_ sender: UIButton) {
@@ -50,7 +61,8 @@ class AddNewMealViewController: UIViewController {
   
   
   @IBAction func cancel(_ sender: Any) {
-    navigationController?.popViewController(animated: true)
+    //navigationController?.popViewController(animated: true)
+    dismiss(animated: true)
   }
   
   @IBAction func save(_ sender: Any) {
@@ -60,23 +72,12 @@ class AddNewMealViewController: UIViewController {
     
     let mealListItem = MealListItem(name: mealName, calories: caloriesValue, category: mealCategory)
     delegate?.addNewMealViewController(self, didFinishAdding: mealListItem)
+    dismiss(animated: true)
   }
   
   @IBAction func calorieTextFieldKeyboard(_ sender: Any) {
     calorieTextField.keyboardType = UIKeyboardType.numberPad
   }
-  
-  
-  
-  override func viewDidLoad() {
-        super.viewDidLoad()
-    
-    view.backgroundColor = UIColor.darkGray
-    
-    
-    
-
-    }
 
     /*
     // MARK: - Navigation

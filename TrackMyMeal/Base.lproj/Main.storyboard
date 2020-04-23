@@ -61,7 +61,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="9eW-gf-Kvp">
                             <connections>
                                 <action selector="addMeal:" destination="Vzz-Jc-I8M" id="9hB-kx-owZ"/>
-                                <segue destination="7wr-gl-G9k" kind="show" identifier="NewMealEntrySegue" id="zxR-pS-ReS"/>
+                                <segue destination="7wr-gl-G9k" kind="presentation" identifier="NewMealEntrySegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="zxR-pS-ReS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -70,7 +70,7 @@
             </objects>
             <point key="canvasLocation" x="307.24637681159425" y="138.61607142857142"/>
         </scene>
-        <!--New Meal-->
+        <!--Add New Meal View Controller-->
         <scene sceneID="L2A-gR-jUq">
             <objects>
                 <viewController id="7wr-gl-G9k" customClass="AddNewMealViewController" customModule="TrackMyMeal" customModuleProvider="target" sceneMemberID="viewController">
@@ -78,129 +78,101 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" id="7d7-dA-Yn3">
-                                <rect key="frame" x="20" y="136" width="374" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S6v-N9-Ee1" customClass="AddNewMealPopupView" customModule="TrackMyMeal" customModuleProvider="target">
+                                <rect key="frame" x="20" y="44" width="374" height="347"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-oS-AtY">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="82"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-Bt-Eq5">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Calories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zsa-Cr-kPH">
-                                                <rect key="frame" x="0.0" y="48" width="374" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="calorieTextFieldKeyboard:" destination="7wr-gl-G9k" eventType="editingDidBegin" id="fbl-5y-Sf1"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="g5o-1a-b60">
-                                        <rect key="frame" x="0.0" y="96" width="374" height="45"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gT-sI-rcq">
-                                                <rect key="frame" x="0.0" y="0.0" width="162" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="162" id="7Eg-Fm-4l7"/>
-                                                    <constraint firstAttribute="height" constant="45" id="P2L-X5-Wyx"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
-                                                <state key="normal" title="Breakfast">
-                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="didTapBreakfast:" destination="7wr-gl-G9k" eventType="touchUpInside" id="i26-SS-tUU"/>
-                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="4jD-wo-jfQ"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCz-Or-eT0">
-                                                <rect key="frame" x="212" y="0.0" width="162" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="162" id="8H5-Kb-dKf"/>
-                                                    <constraint firstAttribute="height" constant="45" id="Kev-Up-f16"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
-                                                <state key="normal" title="Lunch">
-                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="didTapLunch:" destination="7wr-gl-G9k" eventType="touchUpInside" id="JXw-Hj-BSJ"/>
-                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="mKY-8J-44b"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="kC1-Lb-wP4">
-                                        <rect key="frame" x="0.0" y="155" width="374" height="45"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaM-T6-Te7">
-                                                <rect key="frame" x="0.0" y="0.0" width="162" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="162" id="MCw-Ca-eBN"/>
-                                                    <constraint firstAttribute="height" constant="45" id="sjA-1b-cpH"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
-                                                <state key="normal" title="Dinner">
-                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="didTapDinner:" destination="7wr-gl-G9k" eventType="touchUpInside" id="ngB-U1-wq3"/>
-                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="Pnc-IQ-6RH"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eY1-QC-iQT">
-                                                <rect key="frame" x="212" y="0.0" width="162" height="45"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="4sX-pd-Ds6"/>
-                                                    <constraint firstAttribute="width" constant="162" id="w2a-uP-jCI"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
-                                                <state key="normal" title="Snack">
-                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="didTapSnack:" destination="7wr-gl-G9k" eventType="touchUpInside" id="reK-nu-hf4"/>
-                                                    <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="LD4-3m-SC6"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Meal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yia-8g-HfN">
+                                        <rect key="frame" x="8" y="8" width="358" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Meal Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DPs-11-VAz">
+                                        <rect key="frame" x="8" y="64" width="358" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Calories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oqD-5g-IIx">
+                                        <rect key="frame" x="8" y="113" width="358" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="calorieTextFieldKeyboard:" destination="7wr-gl-G9k" eventType="editingDidEnd" id="rjv-tA-2Jv"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGy-BS-fs0">
+                                        <rect key="frame" x="64" y="179" width="100" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Breakfast"/>
+                                        <connections>
+                                            <action selector="didTapBreakfast:" destination="7wr-gl-G9k" eventType="touchUpInside" id="uA5-eZ-l3f"/>
+                                            <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="Shq-pe-euH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKT-nl-jZq">
+                                        <rect key="frame" x="210" y="179" width="100" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Lunch"/>
+                                        <connections>
+                                            <action selector="didTapLunch:" destination="7wr-gl-G9k" eventType="touchUpInside" id="nSa-tb-LOg"/>
+                                            <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="TRt-8n-4xy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9l-bD-tAB">
+                                        <rect key="frame" x="64" y="241" width="100" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Dinner"/>
+                                        <connections>
+                                            <action selector="didTapDinner:" destination="7wr-gl-G9k" eventType="touchUpInside" id="5L0-Qz-EhF"/>
+                                            <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="6KO-Bu-HFb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JyG-rG-N9G">
+                                        <rect key="frame" x="210" y="240" width="100" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Snack"/>
+                                        <connections>
+                                            <action selector="didTapSnack:" destination="7wr-gl-G9k" eventType="touchUpInside" id="Ql7-9y-kCX"/>
+                                            <action selector="selectMealCategory:" destination="7wr-gl-G9k" eventType="touchUpInside" id="CBZ-3F-i9M"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3r-HW-0MH">
+                                        <rect key="frame" x="8" y="289" width="46" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" image="xmark" catalog="system"/>
+                                        <connections>
+                                            <action selector="cancel:" destination="7wr-gl-G9k" eventType="touchUpInside" id="mo8-ze-JiD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nc-hI-Fw6">
+                                        <rect key="frame" x="320" y="289" width="46" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" image="checkmark" catalog="system"/>
+                                        <connections>
+                                            <action selector="save:" destination="7wr-gl-G9k" eventType="touchUpInside" id="h9D-N6-SeR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.39597602739726029" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="feC-ni-OdK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Meal" id="Weh-Sp-Jah">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qBB-Ar-4i1">
-                            <connections>
-                                <action selector="cancel:" destination="7wr-gl-G9k" id="hvd-fp-xhk"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="neW-pB-Prb">
-                            <connections>
-                                <action selector="save:" destination="7wr-gl-G9k" id="0l2-yT-xqA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
-                        <outlet property="addBarButton" destination="neW-pB-Prb" id="aUy-yJ-KYG"/>
-                        <outlet property="calorieTextField" destination="Zsa-Cr-kPH" id="CJd-kM-AJR"/>
-                        <outlet property="cancelBarButton" destination="qBB-Ar-4i1" id="KTZ-5Q-Rfz"/>
-                        <outlet property="mealNameTextField" destination="RAf-Bt-Eq5" id="cLf-eJ-nqI"/>
-                        <outletCollection property="mealCategoryButtons" destination="8gT-sI-rcq" collectionClass="NSMutableArray" id="BNB-ng-jfu"/>
-                        <outletCollection property="mealCategoryButtons" destination="pCz-Or-eT0" collectionClass="NSMutableArray" id="uUC-4O-TN8"/>
-                        <outletCollection property="mealCategoryButtons" destination="YaM-T6-Te7" collectionClass="NSMutableArray" id="s8i-gz-dxQ"/>
-                        <outletCollection property="mealCategoryButtons" destination="eY1-QC-iQT" collectionClass="NSMutableArray" id="dSU-lG-qvt"/>
+                        <outlet property="addButton" destination="5Nc-hI-Fw6" id="gAk-AP-XlQ"/>
+                        <outlet property="calorieTextField" destination="oqD-5g-IIx" id="mCL-nj-1Yw"/>
+                        <outlet property="cancelButton" destination="r3r-HW-0MH" id="6V5-lW-Asl"/>
+                        <outlet property="mealNameTextField" destination="DPs-11-VAz" id="1vi-jX-Uan"/>
+                        <outlet property="titleLabel" destination="yia-8g-HfN" id="mc3-X6-yAV"/>
+                        <outletCollection property="mealCategoryButtons" destination="PGy-BS-fs0" collectionClass="NSMutableArray" id="bhv-hR-bYg"/>
+                        <outletCollection property="mealCategoryButtons" destination="oKT-nl-jZq" collectionClass="NSMutableArray" id="RP5-Uj-kxV"/>
+                        <outletCollection property="mealCategoryButtons" destination="Z9l-bD-tAB" collectionClass="NSMutableArray" id="WwZ-0Q-Udx"/>
+                        <outletCollection property="mealCategoryButtons" destination="JyG-rG-N9G" collectionClass="NSMutableArray" id="uQq-aJ-X8y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dak-2f-ECr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -229,4 +201,8 @@
             <point key="canvasLocation" x="-604.34782608695662" y="138.61607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
 </document>

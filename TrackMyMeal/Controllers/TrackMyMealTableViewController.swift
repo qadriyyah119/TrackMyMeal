@@ -125,7 +125,7 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem) {
       
       if let sectionCategory = sectionForMealIndex(meal.category.rawValue) {
-        let newIndexPath = IndexPath(row: mealList.mealSectionList(for: sectionCategory).count, section: sectionCategory.rawValue)
+        //let newIndexPath = IndexPath(row: mealList.mealSectionList(for: sectionCategory).count, section: sectionCategory.rawValue)
         mealList.meals.append(meal)
         tableView.beginUpdates()
         tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
