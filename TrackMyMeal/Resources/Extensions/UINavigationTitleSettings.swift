@@ -8,14 +8,21 @@
 
 import UIKit
 
-class UINavigationTitleSettings: UINavigationBar {
+extension UINavigationBar {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+  func addNavigationTitleCustomSettings() {
+    
+    let navBarAppearance = UINavigationBar.appearance()
+    navBarAppearance.titleTextAttributes = [
+      NSAttributedString.Key.font: UIFont(name: Theme.titleFontName, size: 35)!,
+      NSAttributedString.Key.foregroundColor: Theme.accentColor!
+    ]
+    
+//    let attrs = [
+//      NSAttributedString.Key.font: UIFont(name: Theme.titleFontName, size: 35)
+//      NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single
+//      ] as [NSAttributedString.Key : Any]
+ //   ]
+  }
 
 }
