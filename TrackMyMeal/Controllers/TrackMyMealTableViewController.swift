@@ -107,7 +107,26 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         return cell
     }
   
+  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      if let sectionCategory = sectionForMealIndex(indexPath.section) {
+      let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
+      print(meal.name)
+        if let index = mealList.meals.firstIndex(where: { $0.id == meal.id }) {
+          mealList.meals.remove(at: index)
+          tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
+      }
+    }
+  }
 
+  
     
     //MARK: Actions
     
