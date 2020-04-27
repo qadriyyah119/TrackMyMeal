@@ -9,8 +9,9 @@
 import UIKit
 // Data Model representing the structure and store the information on the Meal Detail scene/view
 
-class MealListItem {
+class MealListItem: Identifiable {
   
+  let id: UUID
   var name: String
   var calories: Int
   var category: MealCategory
@@ -18,6 +19,7 @@ class MealListItem {
   // MARK: - Initialization
   
   init(name: String, calories: Int, category: MealCategory) {
+    id = UUID()
     self.name = name
     self.calories = calories
     self.category = category
