@@ -11,7 +11,7 @@ import UIKit
 // Any viewController that wants to get a new meal entry back must implement this protocol
 protocol AddNewMealViewDelegate: class {
   func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem)
-  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealSectionIndex: Int, newMealSectionIndex: Int)
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealListItem: MealListItem ,oldMealSectionIndex: Int, newMealSectionIndex: Int)
 }
 
 class AddNewMealViewController: UIViewController {
@@ -22,8 +22,6 @@ class AddNewMealViewController: UIViewController {
   // for editing activities
   weak var mealToEdit: MealListItem?
   weak var mealList: MealList?
-  var mealSectionIndexToEdit: Int!
-  var mealIndexToEdit: Int!
     
   private var mealCategory: MealCategory?
   
@@ -89,13 +87,14 @@ class AddNewMealViewController: UIViewController {
     guard let mealName = self.mealNameTextField.text else { return }
     
     if let mealListItem = mealToEdit {
+      let oldMealListItem = mealListItem
       let oldMealSectionIndex = mealListItem.category.rawValue
       mealListItem.calories = caloriesValue
       mealListItem.name = mealName
       mealListItem.category = mealCategory
       let newMealSectionIndex = mealListItem.category.rawValue
       
-      delegate?.addNewMealViewController(self, didFinishEditing: mealListItem, oldMealSectionIndex: oldMealSectionIndex, newMealSectionIndex: newMealSectionIndex)
+      delegate?.addNewMealViewController(self, didFinishEditing: mealListItem, oldMealListItem: oldMealListItem ,oldMealSectionIndex: oldMealSectionIndex, newMealSectionIndex: newMealSectionIndex)
       
     } else {
     

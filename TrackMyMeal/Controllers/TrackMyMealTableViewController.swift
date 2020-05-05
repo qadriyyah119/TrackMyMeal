@@ -165,34 +165,36 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         navigationController?.popViewController(animated: true)
     }
   
-  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealSectionIndex: Int, newMealSectionIndex: Int) {
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealListItem: MealListItem ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
     
-      for sectionCategory in MealCategory.allCases {
-        let currentMeals = mealList.mealSectionList(for: sectionCategory)
+    for sectionCategory in MealCategory.allCases {
+      let currentMeals = mealList.mealSectionList(for: sectionCategory)
       if let index = currentMeals.firstIndex(where: { $0.id == meal.id }) {
-        let indexPath = IndexPath(row: index, section: sectionCategory.rawValue)
+        let indexPath = IndexPath(row: index, section: newMealSectionIndex)
         
-        //if indexPath[sectionCategory.rawValue] == oldMealSectionIndex
         if oldMealSectionIndex == newMealSectionIndex {
-          mealList.meals[index] = meal
           tableView.beginUpdates()
-          //tableView.reloadRows(at: [indexPath], with: .automatic)
-          tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
+          tableView.reloadRows(at: [indexPath], with: .automatic)
+          tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
           tableView.endUpdates()
         } else {
-          mealList.meals.remove(at: index)
-          mealList.meals.append(meal)
-          
-          tableView.performBatchUpdates({
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            let newIndexPath = IndexPath(row: mealList.mealSectionList(for: meal.category).count, section: newMealSectionIndex)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-          })
+          if let sectionCategory = sectionForMealIndex(oldMealSectionIndex) {
+            let currentMeals = mealList.mealSectionList(for: sectionCategory)
+            if let index = currentMeals.firstIndex(where: { $0.id == oldMealListItem.id }) {
+              let oldIndexPath = IndexPath(row: index, section: oldMealSectionIndex)
+              mealList.meals.remove(at: index)
+              mealList.meals.append(meal)
+              
+              tableView.deleteRows(at: [oldIndexPath], with: .automatic)
+            }
+            tableView.beginUpdates()
+            tableView.reloadSections(IndexSet(integer: oldMealSectionIndex), with: .automatic)
+            tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
+            tableView.endUpdates()
+          }
         }
-        
       }
     }
-   
   }
 }
 
