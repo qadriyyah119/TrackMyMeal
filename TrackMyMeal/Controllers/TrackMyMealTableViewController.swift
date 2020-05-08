@@ -174,7 +174,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         
         if oldMealSectionIndex == newMealSectionIndex {
           tableView.beginUpdates()
-          tableView.reloadRows(at: [indexPath], with: .automatic)
           tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
           tableView.endUpdates()
         } else {
@@ -188,8 +187,7 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
               tableView.deleteRows(at: [oldIndexPath], with: .automatic)
             }
             tableView.beginUpdates()
-            tableView.reloadSections(IndexSet(integer: oldMealSectionIndex), with: .automatic)
-            tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
+            tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .automatic)
             tableView.endUpdates()
           }
         }
