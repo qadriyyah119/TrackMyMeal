@@ -11,14 +11,19 @@ import UIKit
 // Any viewController that wants to get a new meal entry back must implement this protocol
 protocol AddNewMealViewDelegate: class {
   func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem)
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealListItem: MealListItem ,oldMealSectionIndex: Int, newMealSectionIndex: Int)
 }
 
 class AddNewMealViewController: UIViewController {
   
   // any viewController that implements this protocol can be a delegate of the AddNewMealViewController
   weak var delegate: AddNewMealViewDelegate?
+  
+  // for editing activities
+  weak var mealToEdit: MealListItem?
+  weak var mealList: MealList?
     
-    private var mealCategory: MealCategory?
+  private var mealCategory: MealCategory?
   
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var cancelButton: UIButton!
@@ -35,7 +40,17 @@ class AddNewMealViewController: UIViewController {
     addButton.createFloatingActionButton()
     titleLabel.font = UIFont(name: Theme.titleFontName, size: 25)
     mealCategoryButtons.forEach({ $0.addMealButtonSettings()})
+    
+    if let meal = mealToEdit {
+      titleLabel.text = "Edit Meal"
+      mealNameTextField.text = meal.name
+      calorieTextField.text = String(meal.calories)
+      selectMealCategory(mealCategoryButtons[meal.category.rawValue])
+      mealCategory = meal.category
+    }
+    
   }
+  
   
   @IBAction func selectMealCategory(_ sender: UIButton) {
     mealCategoryButtons.forEach({ $0.backgroundColor = UIColor.white; $0.setTitleColor(UIColor.black, for: .normal)})
@@ -61,17 +76,31 @@ class AddNewMealViewController: UIViewController {
   
   
   @IBAction func cancel(_ sender: Any) {
-    //navigationController?.popViewController(animated: true)
+    
     dismiss(animated: true)
   }
   
   @IBAction func save(_ sender: Any) {
+    
     guard let mealCategory = self.mealCategory else { return }
     guard let calories = self.calorieTextField.text, let caloriesValue = Int(calories) else { return }
     guard let mealName = self.mealNameTextField.text else { return }
     
+    if let mealListItem = mealToEdit {
+      let oldMealListItem = mealListItem
+      let oldMealSectionIndex = mealListItem.category.rawValue
+      mealListItem.calories = caloriesValue
+      mealListItem.name = mealName
+      mealListItem.category = mealCategory
+      let newMealSectionIndex = mealListItem.category.rawValue
+      
+      delegate?.addNewMealViewController(self, didFinishEditing: mealListItem, oldMealListItem: oldMealListItem ,oldMealSectionIndex: oldMealSectionIndex, newMealSectionIndex: newMealSectionIndex)
+      
+    } else {
+    
     let mealListItem = MealListItem(name: mealName, calories: caloriesValue, category: mealCategory)
     delegate?.addNewMealViewController(self, didFinishAdding: mealListItem)
+    }
     dismiss(animated: true)
   }
   

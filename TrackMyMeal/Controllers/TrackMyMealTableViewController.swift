@@ -107,6 +107,10 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         return cell
     }
   
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return true
   }
@@ -126,7 +130,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     }
   }
 
-  
     
     //MARK: Actions
     
@@ -138,13 +141,22 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         if segue.identifier == "NewMealEntrySegue" {
             let destination = segue.destination as? AddNewMealViewController
             destination?.delegate = self
-        }
+        } else if segue.identifier == "EditMeal" {
+          let destination = segue.destination as? AddNewMealViewController
+          if let cell = sender as? MealCell,
+            let indexPath = tableView.indexPath(for: cell),
+            let sectionCategory = sectionForMealIndex(indexPath.section) {
+            let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
+            
+            destination?.delegate = self
+            destination?.mealToEdit = meal
+          }
+      }
     }
     
     func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem) {
       
       if let sectionCategory = sectionForMealIndex(meal.category.rawValue) {
-        //let newIndexPath = IndexPath(row: mealList.mealSectionList(for: sectionCategory).count, section: sectionCategory.rawValue)
         mealList.meals.append(meal)
         tableView.beginUpdates()
         tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
@@ -152,6 +164,36 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       }
         navigationController?.popViewController(animated: true)
     }
+  
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealListItem: MealListItem ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
+    
+    for sectionCategory in MealCategory.allCases {
+      let currentMeals = mealList.mealSectionList(for: sectionCategory)
+      if let index = currentMeals.firstIndex(where: { $0.id == meal.id }) {
+        let indexPath = IndexPath(row: index, section: newMealSectionIndex)
+        
+        if oldMealSectionIndex == newMealSectionIndex {
+          tableView.beginUpdates()
+          tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
+          tableView.endUpdates()
+        } else {
+          if let sectionCategory = sectionForMealIndex(oldMealSectionIndex) {
+            let currentMeals = mealList.mealSectionList(for: sectionCategory)
+            if let index = currentMeals.firstIndex(where: { $0.id == oldMealListItem.id }) {
+              let oldIndexPath = IndexPath(row: index, section: oldMealSectionIndex)
+              mealList.meals.remove(at: index)
+              mealList.meals.append(meal)
+              
+              tableView.deleteRows(at: [oldIndexPath], with: .automatic)
+            }
+            tableView.beginUpdates()
+            tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .automatic)
+            tableView.endUpdates()
+          }
+        }
+      }
+    }
+  }
 }
 
 // Look into the below message. Warning after didFinishAdding function and new row was inserted.
