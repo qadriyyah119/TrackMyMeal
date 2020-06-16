@@ -7,11 +7,42 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+  //create an instance of the NSPersistentContainer based on the TrackMyMeal Data Model
+  // then loads the relevant data model from the data store
+  // if loading the data fails for some reason the app will crash with a fatal error
+  // otherwise it will return a persistent container
+  // we add it to the AppDelegate because we can access this file from any view controller and access the persistent container as well
+  lazy var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: "TrackMyMeal")
+    print(container.persistentStoreDescriptions.first?.url)
+    container.loadPersistentStores { (storeDescription, error) in
+      print(storeDescription)
+      if let error = error as NSError? {
+        fatalError("Unresolved error \(error), \(error.userInfo)")
+      }
+    }
+    return container
+  }()
+  
+  // save any Core Data changes
+  func saveContext() {
+    let context = persistentContainer.viewContext
+    if context.hasChanges {
+      do {
+        try context.save()
+      } catch {
+        let error = error as NSError
+        fatalError("Unsolved error \(error), \(error.userInfo)")
+      }
+    }
+  }
+  
+  
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.

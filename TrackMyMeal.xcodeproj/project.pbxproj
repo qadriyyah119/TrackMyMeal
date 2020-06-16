@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1830C8E324805CF80010E1E0 /* TrackMyMeal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1830C8E124805CF80010E1E0 /* TrackMyMeal.xcdatamodeld */; };
+		1830C8E7248062A30010E1E0 /* Meal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830C8E5248062A30010E1E0 /* Meal+CoreDataClass.swift */; };
+		1830C8E8248062A30010E1E0 /* Meal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830C8E6248062A30010E1E0 /* Meal+CoreDataProperties.swift */; };
 		184C6B022416D47800BD8399 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B012416D47800BD8399 /* AppDelegate.swift */; };
 		184C6B042416D47800BD8399 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B032416D47800BD8399 /* SceneDelegate.swift */; };
 		184C6B092416D47800BD8399 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184C6B072416D47800BD8399 /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1830C8E224805CF80010E1E0 /* TrackMyMeal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrackMyMeal.xcdatamodel; sourceTree = "<group>"; };
+		1830C8E5248062A30010E1E0 /* Meal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1830C8E6248062A30010E1E0 /* Meal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		184C6AFE2416D47800BD8399 /* TrackMyMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackMyMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184C6B012416D47800BD8399 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		184C6B032416D47800BD8399 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1830C8E42480616E0010E1E0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1830C8E5248062A30010E1E0 /* Meal+CoreDataClass.swift */,
+				1830C8E6248062A30010E1E0 /* Meal+CoreDataProperties.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		184C6AF52416D47800BD8399 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +101,7 @@
 		184C6B002416D47800BD8399 /* TrackMyMeal */ = {
 			isa = PBXGroup;
 			children = (
+				1830C8E42480616E0010E1E0 /* Data */,
 				189DEDEA2450A73800791165 /* Resources */,
 				184C6B012416D47800BD8399 /* AppDelegate.swift */,
 				184C6B032416D47800BD8399 /* SceneDelegate.swift */,
@@ -136,6 +152,7 @@
 				189DEDF22450B07B00791165 /* Montserrat-Light.ttf */,
 				189DEDF42450B0AA00791165 /* PlayfairDisplay-VariableFont_wght.ttf */,
 				189DEDF02450AE8000791165 /* Theme.swift */,
+				1830C8E124805CF80010E1E0 /* TrackMyMeal.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -236,8 +253,11 @@
 				189DEDF92450F7E500791165 /* UINavigationTitleSettings.swift in Sources */,
 				18FCE49B243BB89A00FE430B /* AddNewMealViewController.swift in Sources */,
 				189DEDEF2450ABC000791165 /* UIViewShadowExtension.swift in Sources */,
+				1830C8E324805CF80010E1E0 /* TrackMyMeal.xcdatamodeld in Sources */,
 				184C6B182416E3C300BD8399 /* MealList.swift in Sources */,
 				18C71E812452075200409A34 /* UIButtonExtension.swift in Sources */,
+				1830C8E7248062A30010E1E0 /* Meal+CoreDataClass.swift in Sources */,
+				1830C8E8248062A30010E1E0 /* Meal+CoreDataProperties.swift in Sources */,
 				184C6B022416D47800BD8399 /* AppDelegate.swift in Sources */,
 				184C6B042416D47800BD8399 /* SceneDelegate.swift in Sources */,
 				189DEDF72450B8FB00791165 /* UITableViewCustomSettings.swift in Sources */,
@@ -438,6 +458,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1830C8E124805CF80010E1E0 /* TrackMyMeal.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1830C8E224805CF80010E1E0 /* TrackMyMeal.xcdatamodel */,
+			);
+			currentVersion = 1830C8E224805CF80010E1E0 /* TrackMyMeal.xcdatamodel */;
+			path = TrackMyMeal.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 184C6AF62416D47800BD8399 /* Project object */;
 }

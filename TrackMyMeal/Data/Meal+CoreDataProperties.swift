@@ -11,15 +11,17 @@ import Foundation
 import CoreData
 
 
-extension Meal {
+extension Meal: Identifiable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Meal> {
         return NSFetchRequest<Meal>(entityName: "Meal")
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var id: UUID?
+    @NSManaged public var name: String
+    @NSManaged public var id: UUID
     @NSManaged public var calories: Int32
     @NSManaged public var category: Int32
 
 }
+
+

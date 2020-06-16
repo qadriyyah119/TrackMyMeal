@@ -11,6 +11,34 @@ import Foundation
 import CoreData
 
 
-public class Meal: NSManagedObject {
-
+enum MealCategory: Int32, CaseIterable, Equatable {
+  case breakfast = 0, lunch, dinner, snack
+  
+  var mealName: String {
+      switch self {
+      case .breakfast: return "Breakfast"
+      case .lunch: return "Lunch"
+      case .dinner: return "Dinner"
+      case .snack: return "Snack"
+      }
+  }
 }
+
+public class Meal: NSManagedObject {
+  
+  var mealCategory: MealCategory {
+    get { MealCategory(rawValue: self.category) ?? .breakfast }
+    set { self.category = newValue.rawValue }
+  }
+  
+//  func mealSectionList(for mealCategory: MealCategory) -> [Meal] {
+//    return meals.filter { $0.category == mealCategory.rawValue }
+//    }
+
+//    func mealCalorieList(for mealCategory: MealCategory) -> Int {
+//      let meals = mealSectionList(for: mealCategory)
+//      return meals.reduce(0) {$0 + ($1.calories)}
+//    }
+}
+
+
