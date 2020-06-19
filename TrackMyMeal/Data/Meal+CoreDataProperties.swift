@@ -21,6 +21,11 @@ extension Meal: Identifiable {
     @NSManaged public var id: UUID
     @NSManaged public var calories: Int32
     @NSManaged public var category: Int32
+  
+    var mealCategory: MealCategory {
+    get { MealCategory(rawValue: category) ?? .breakfast }
+    set { category = newValue.rawValue }
+  }
 
 }
 

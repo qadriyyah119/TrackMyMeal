@@ -26,9 +26,7 @@ enum MealCategory: Int32, CaseIterable, Equatable {
 
 public class Meal: NSManagedObject {
   
-  var mealCategory: MealCategory {
-    get { MealCategory(rawValue: self.category) ?? .breakfast }
-    set { self.category = newValue.rawValue }
+  
   }
   
 //  func mealSectionList(for mealCategory: MealCategory) -> [Meal] {
@@ -39,6 +37,6 @@ public class Meal: NSManagedObject {
 //      let meals = mealSectionList(for: mealCategory)
 //      return meals.reduce(0) {$0 + ($1.calories)}
 //    }
-}
+
 
 
