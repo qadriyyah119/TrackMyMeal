@@ -77,27 +77,16 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       return nil
     }
     
-    var title: String = ""
-    var calorieTotal: Int = 0
     
-//    if let sectionCategory = sectionForMealIndex(section){
-//      title = sectionCategory.mealName
-//
-//      calorieTotal = 0 //mealList.mealCalorieList(for: sectionCategory)
-//    }
-//
-//    view.title.text = title
-//    view.calorieCount.text = String(calorieTotal)
-
     
-    if let mealSectionCategory = MealCategory(rawValue: Int32(section))?.mealName {
-      view.title.text = mealSectionCategory
-      view.calorieCount.text = String(calorieTotal)
-    }
+    let allMealsForSection = fetchedResultsController?
+    .fetchedObjects?
+    .filter { $0.category == section }
     
-//    guard let sections = fetchedResultsController?.sections else { return nil }
-//    view.title.text = sections[section].indexTitle ?? ""
-//    view.calorieCount.text = String(calorieTotal)
+    let caloriesTotal = allMealsForSection?.reduce(0) {$0 + ($1.calories)} ?? 0
+    
+    view.title.text = MealCategory(rawValue: Int32(section))?.mealName ?? ""
+    view.calorieCount.text = String(caloriesTotal)
     
     return view
     
@@ -109,30 +98,11 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-      //first get the sections array from the fetched results controller. Next get a list of meals for that section
-      //guard let mealSections = fetchedResultsController?.sections else { return 0 }
-      //, let meals = mealSections[section].objects as? [Meal]
+      let allMealsForSection = fetchedResultsController?
+        .fetchedObjects?
+        .filter { $0.category == section }
       
-      //meals.filter { $0.category == Int32(mealSection) }
-      
-      //print(meals.count)
-      //return meals.count
-      
-//      if let sectionTitle = sectionForMealIndex(mealSections[section] as? Int ?? 0) {
-//        switch sectionTitle {
-//        case .breakfast:
-//          return mealSections[Int(sectionTitle.rawValue)].objects?.count ?? 0
-//        case .lunch:
-//          return mealSections[Int(sectionTitle.rawValue)].objects?.count ?? 0
-//        case .dinner:
-//          return mealSections[Int(sectionTitle.rawValue)].objects?.count ?? 0
-//        case .snack:
-//          return mealSections[Int(sectionTitle.rawValue)].objects?.count ?? 0
-//        }
-//      }
-      
-      let allMeals = fetchedResultsController?.sections?.compactMap{ $0.objects }
-      return 0
+      return allMealsForSection?.count ?? 0
     }
     
     
@@ -140,17 +110,12 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealListCell", for: indexPath) as? MealCell else {
             fatalError("Fatal Error Test")
         }
-        
-//      if let sectionCategory = sectionForMealIndex(indexPath.section) {
-//        let meals = mealList.mealSectionList(for: sectionCategory)
-//        let meal = meals[indexPath.row]
-//
-//
-//        cell.mealTextLabel.text = meal.name
-//        cell.calorieLabel.text = String(meal.calories)
-//      }
       
-        guard let meal = fetchedResultsController?.object(at: indexPath) else { return UITableViewCell() }
+      let allMealsForSection = fetchedResultsController?
+      .fetchedObjects?
+        .filter { $0.category == indexPath.section }
+      
+      guard let meal = allMealsForSection?[indexPath.row] else { return UITableViewCell() }
         cell.mealTextLabel.text = meal.name
         cell.calorieLabel.text = String(meal.calories)
         
