@@ -7,21 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 // Any viewController that wants to get a new meal entry back must implement this protocol
 protocol AddNewMealViewDelegate: class {
-  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem)
-  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealListItem: MealListItem ,oldMealSectionIndex: Int, newMealSectionIndex: Int)
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: Meal)
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: Meal, oldMealListItem: Meal ,oldMealSectionIndex: Int, newMealSectionIndex: Int)
 }
 
 class AddNewMealViewController: UIViewController {
+    
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
   // any viewController that implements this protocol can be a delegate of the AddNewMealViewController
   weak var delegate: AddNewMealViewDelegate?
   
   // for editing activities
-  weak var mealToEdit: MealListItem?
-  weak var mealList: MealList?
+  weak var mealToEdit: Meal?
+//  weak var mealToEdit: MealListItem?
+  //weak var mealList: MealList?
     
   private var mealCategory: MealCategory?
   
@@ -45,8 +50,8 @@ class AddNewMealViewController: UIViewController {
       titleLabel.text = "Edit Meal"
       mealNameTextField.text = meal.name
       calorieTextField.text = String(meal.calories)
-      selectMealCategory(mealCategoryButtons[meal.category.rawValue])
-      mealCategory = meal.category
+      selectMealCategory(mealCategoryButtons[Int(meal.category)])
+      mealCategory = MealCategory(rawValue: meal.category)
     }
     
   }
@@ -88,17 +93,22 @@ class AddNewMealViewController: UIViewController {
     
     if let mealListItem = mealToEdit {
       let oldMealListItem = mealListItem
-      let oldMealSectionIndex = mealListItem.category.rawValue
-      mealListItem.calories = caloriesValue
+      let oldMealSectionIndex = mealListItem.category
+      mealListItem.calories = Int32(caloriesValue)
       mealListItem.name = mealName
-      mealListItem.category = mealCategory
-      let newMealSectionIndex = mealListItem.category.rawValue
+      mealListItem.category = mealCategory.rawValue
+      let newMealSectionIndex = mealListItem.category
       
-      delegate?.addNewMealViewController(self, didFinishEditing: mealListItem, oldMealListItem: oldMealListItem ,oldMealSectionIndex: oldMealSectionIndex, newMealSectionIndex: newMealSectionIndex)
+      delegate?.addNewMealViewController(self, didFinishEditing: mealListItem, oldMealListItem: oldMealListItem ,oldMealSectionIndex: Int(oldMealSectionIndex), newMealSectionIndex: Int(newMealSectionIndex))
       
     } else {
     
-    let mealListItem = MealListItem(name: mealName, calories: caloriesValue, category: mealCategory)
+        let mealListItem = Meal(entity: Meal.entity(), insertInto: context)
+        mealListItem.calories = Int32(caloriesValue)
+        mealListItem.name = mealName
+        mealListItem.category = mealCategory.rawValue
+        mealListItem.id = UUID()
+
     delegate?.addNewMealViewController(self, didFinishAdding: mealListItem)
     }
     dismiss(animated: true)

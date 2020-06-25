@@ -15,6 +15,6 @@ extension UITableView {
     layoutMargins = UIEdgeInsets.zero
     separatorInset = UIEdgeInsets.zero
     separatorColor = Theme.accentColor
-    tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    //tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
   }
 }

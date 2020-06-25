@@ -7,18 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
-class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDelegate {
+class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDelegate, NSFetchedResultsControllerDelegate {
+  
+  private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+  private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  
+  var meals = [Meal]()
+  
+  private var fetchedResultsController: NSFetchedResultsController<Meal>?
     
-    var mealList: MealList
+  //var mealList: MealList
   
   private func sectionForMealIndex(_ index: Int) -> MealCategory? {
-    return MealCategory(rawValue: index)
+    return MealCategory(rawValue: Int32(index))
   }
     
   required init?(coder aDecoder: NSCoder) {
     
-    mealList = MealList()
+    //mealList = MealList()
     super.init(coder: aDecoder)
   }
     override func viewDidLoad() {
@@ -29,20 +37,38 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       // Register my custom header view
       tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         
-        mealList = MealList()
+        //mealList = MealList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        getMealLists()
         
     }
     
+  private func getMealLists() {
+    let request = Meal.fetchRequest() as NSFetchRequest<Meal>
+    //let name = NSSortDescriptor(key: #keyPath(Meal.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+    let sort = NSSortDescriptor(key: #keyPath(Meal.category), ascending: true)
+    request.sortDescriptors = [sort]
+    fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: #keyPath(Meal.category), cacheName: nil)
+    
+    do {
+      try fetchedResultsController?.performFetch()
+      
+    } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+    }
+  }
+  
+  
     // MARK: - TableView DataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return MealCategory.allCases.count
+      return Int(MealCategory.allCases.count)
+  
     }
 
   
@@ -51,17 +77,16 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       return nil
     }
     
-    var title: String = ""
-    var calorieTotal: Int = 0
     
-    if let sectionCategory = sectionForMealIndex(section){
-        title = sectionCategory.mealName
-      
-      calorieTotal = mealList.mealCalorieList(for: sectionCategory)
-    }
     
-    view.title.text = title
-    view.calorieCount.text = String(calorieTotal)
+    let allMealsForSection = fetchedResultsController?
+    .fetchedObjects?
+    .filter { $0.category == section }
+    
+    let caloriesTotal = allMealsForSection?.reduce(0) {$0 + ($1.calories)} ?? 0
+    
+    view.title.text = MealCategory(rawValue: Int32(section))?.mealName ?? ""
+    view.calorieCount.text = String(caloriesTotal)
     
     return view
     
@@ -73,20 +98,11 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-      if let sectionTitle = sectionForMealIndex(section){
-        switch sectionTitle {
-        case .breakfast:
-          return mealList.mealSectionList(for: sectionTitle).count
-        case .lunch:
-          return mealList.mealSectionList(for: sectionTitle).count
-        case .dinner:
-          return mealList.mealSectionList(for: sectionTitle).count
-        case .snack:
-          return mealList.mealSectionList(for: sectionTitle).count
-        }
-      }
-        // switch to check and get correct section
-        return 0
+      let allMealsForSection = fetchedResultsController?
+        .fetchedObjects?
+        .filter { $0.category == section }
+      
+      return allMealsForSection?.count ?? 0
     }
     
     
@@ -94,41 +110,41 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealListCell", for: indexPath) as? MealCell else {
             fatalError("Fatal Error Test")
         }
-        
-      if let sectionCategory = sectionForMealIndex(indexPath.section) {
-        let meals = mealList.mealSectionList(for: sectionCategory)
-        let meal = meals[indexPath.row]
-
-        
+      
+      let allMealsForSection = fetchedResultsController?
+      .fetchedObjects?
+        .filter { $0.category == indexPath.section }
+      
+      guard let meal = allMealsForSection?[indexPath.row] else { return UITableViewCell() }
         cell.mealTextLabel.text = meal.name
         cell.calorieLabel.text = String(meal.calories)
-      }
         
         return cell
-    }
+  }
+  
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
   }
-  
+
   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return true
   }
-  
-  
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      if let sectionCategory = sectionForMealIndex(indexPath.section) {
-      let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
-      print(meal.name)
-        if let index = mealList.meals.firstIndex(where: { $0.id == meal.id }) {
-          mealList.meals.remove(at: index)
-          tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
-      }
-    }
-  }
+
+
+//  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//    if editingStyle == .delete {
+//      if let sectionCategory = sectionForMealIndex(indexPath.section) {
+//      let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
+//      print(meal.name)
+//        if let index = mealList.meals.firstIndex(where: { $0.id == meal.id }) {
+//          mealList.meals.remove(at: index)
+//          tableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//        tableView.reloadSections(IndexSet(integer: IndexSet.Element(sectionCategory.rawValue)), with: .automatic)
+//      }
+//    }
+//  }
 
     
     //MARK: Actions
@@ -136,7 +152,7 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     @IBAction func addMeal(_ sender: Any) {
         print("Added Item")
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewMealEntrySegue" {
             let destination = segue.destination as? AddNewMealViewController
@@ -144,55 +160,61 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
         } else if segue.identifier == "EditMeal" {
           let destination = segue.destination as? AddNewMealViewController
           if let cell = sender as? MealCell,
-            let indexPath = tableView.indexPath(for: cell),
-            let sectionCategory = sectionForMealIndex(indexPath.section) {
-            let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
-            
+            let indexPath = tableView.indexPath(for: cell){
+            let meal = fetchedResultsController?.object(at: indexPath)
+//            let sectionCategory = sectionForMealIndex(indexPath.section) {
+//            let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
+
             destination?.delegate = self
             destination?.mealToEdit = meal
           }
       }
     }
-    
-    func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: MealListItem) {
-      
-      if let sectionCategory = sectionForMealIndex(meal.category.rawValue) {
-        mealList.meals.append(meal)
-        tableView.beginUpdates()
-        tableView.reloadSections(IndexSet(integer: sectionCategory.rawValue), with: .automatic)
-        tableView.endUpdates()
+
+    func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: Meal) {
+
+        if let sectionCategory = sectionForMealIndex(Int(meal.category)) {
+        appDelegate.saveContext()
+        getMealLists()
+        tableView.reloadData()
+        //meals.append(meal)
+//        tableView.beginUpdates()
+//          tableView.reloadSections(IndexSet(integer: IndexSet.Element(sectionCategory.rawValue)), with: .automatic)
+//        tableView.endUpdates()
       }
         navigationController?.popViewController(animated: true)
     }
-  
-  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: MealListItem, oldMealListItem: MealListItem ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
-    
-    for sectionCategory in MealCategory.allCases {
-      let currentMeals = mealList.mealSectionList(for: sectionCategory)
-      if let index = currentMeals.firstIndex(where: { $0.id == meal.id }) {
-        let indexPath = IndexPath(row: index, section: newMealSectionIndex)
-        
-        if oldMealSectionIndex == newMealSectionIndex {
-          tableView.beginUpdates()
-          tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
-          tableView.endUpdates()
-        } else {
-          if let sectionCategory = sectionForMealIndex(oldMealSectionIndex) {
-            let currentMeals = mealList.mealSectionList(for: sectionCategory)
-            if let index = currentMeals.firstIndex(where: { $0.id == oldMealListItem.id }) {
-              let oldIndexPath = IndexPath(row: index, section: oldMealSectionIndex)
-              mealList.meals.remove(at: index)
-              mealList.meals.append(meal)
-              
-              tableView.deleteRows(at: [oldIndexPath], with: .automatic)
-            }
-            tableView.beginUpdates()
-            tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .automatic)
-            tableView.endUpdates()
-          }
-        }
-      }
-    }
+
+  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: Meal, oldMealListItem: Meal ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
+
+//    guard let sections = fetchedResultsController?.sections
+//    
+//    for sectionCategory in MealCategory.allCases { // all Meal Categories
+//      let currentMeals = mealList.mealSectionList(for: sectionCategory) // array of meals in each meal category
+//      if let index = currentMeals.firstIndex(where: { $0.id == meal.id }) { // the index of the array of meals that has the same UUID as the meal being passed in from 
+//        let indexPath = IndexPath(row: index, section: newMealSectionIndex)
+//
+//        if oldMealSectionIndex == newMealSectionIndex {
+//          tableView.beginUpdates()
+//          tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
+//          tableView.endUpdates()
+//        } else {
+//          if let sectionCategory = sectionForMealIndex(oldMealSectionIndex) {
+//            let currentMeals = mealList.mealSectionList(for: sectionCategory)
+//            if let index = currentMeals.firstIndex(where: { $0.id == oldMealListItem.id }) {
+//              let oldIndexPath = IndexPath(row: index, section: oldMealSectionIndex)
+//              mealList.meals.remove(at: index)
+//              mealList.meals.append(meal)
+//
+//              tableView.deleteRows(at: [oldIndexPath], with: .automatic)
+//            }
+//            tableView.beginUpdates()
+//            tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .automatic)
+//            tableView.endUpdates()
+//          }
+//        }
+//      }
+//    }
   }
 }
 
