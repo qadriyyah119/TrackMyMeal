@@ -29,14 +29,5 @@ public class Meal: NSManagedObject {
   
   }
   
-//  func mealSectionList(for mealCategory: MealCategory) -> [Meal] {
-//    return meals.filter { $0.category == mealCategory.rawValue }
-//    }
-
-//    func mealCalorieList(for mealCategory: MealCategory) -> Int {
-//      let meals = mealSectionList(for: mealCategory)
-//      return meals.reduce(0) {$0 + ($1.calories)}
-//    }
-
 
 

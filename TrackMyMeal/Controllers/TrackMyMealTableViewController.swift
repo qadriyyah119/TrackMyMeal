@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDelegate, NSFetchedResultsControllerDelegate {
+class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDelegate {
   
   private let appDelegate = UIApplication.shared.delegate as! AppDelegate
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -17,8 +17,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
   var meals = [Meal]()
   
   private var fetchedResultsController: NSFetchedResultsController<Meal>?
-    
-  //var mealList: MealList
   
   private func sectionForMealIndex(_ index: Int) -> MealCategory? {
     return MealCategory(rawValue: Int32(index))
@@ -26,7 +24,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     
   required init?(coder aDecoder: NSCoder) {
     
-    //mealList = MealList()
     super.init(coder: aDecoder)
   }
     override func viewDidLoad() {
@@ -37,7 +34,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       // Register my custom header view
       tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         
-        //mealList = MealList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +49,7 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     let sort = NSSortDescriptor(key: #keyPath(Meal.category), ascending: true)
     request.sortDescriptors = [sort]
     fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: #keyPath(Meal.category), cacheName: nil)
+    fetchedResultsController?.delegate = self
     
     do {
       try fetchedResultsController?.performFetch()
@@ -76,8 +73,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as? SectionHeader else {
       return nil
     }
-    
-    
     
     let allMealsForSection = fetchedResultsController?
     .fetchedObjects?
@@ -111,13 +106,7 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
             fatalError("Fatal Error Test")
         }
       
-      let allMealsForSection = fetchedResultsController?
-      .fetchedObjects?
-        .filter { $0.category == indexPath.section }
-      
-      guard let meal = allMealsForSection?[indexPath.row] else { return UITableViewCell() }
-        cell.mealTextLabel.text = meal.name
-        cell.calorieLabel.text = String(meal.calories)
+      configureCell(cell, at: indexPath)
         
         return cell
   }
@@ -132,19 +121,32 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
   }
 
 
-//  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    if editingStyle == .delete {
-//      if let sectionCategory = sectionForMealIndex(indexPath.section) {
-//      let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
-//      print(meal.name)
-//        if let index = mealList.meals.firstIndex(where: { $0.id == meal.id }) {
-//          mealList.meals.remove(at: index)
-//          tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//        tableView.reloadSections(IndexSet(integer: IndexSet.Element(sectionCategory.rawValue)), with: .automatic)
-//      }
-//    }
-//  }
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      
+      let allMealsForSection = fetchedResultsController?
+      .fetchedObjects?
+        .filter { $0.category == indexPath.section }
+      
+      guard let meal = allMealsForSection?[indexPath.row] else { return }
+      
+      context.delete(meal)
+      appDelegate.saveContext()
+      getMealLists()
+      tableView.reloadData()
+      //tableView.reloadSections(IndexSet(integer: IndexSet.Element(meal.category)), with: .automatic)
+    }
+  }
+  
+  func configureCell(_ cell: MealCell, at indexPath: IndexPath) {
+    let allMealsForSection = fetchedResultsController?
+    .fetchedObjects?
+      .filter { $0.category == indexPath.section }
+    
+    guard let meal = allMealsForSection?[indexPath.row] else { return }
+      cell.mealTextLabel.text = meal.name
+      cell.calorieLabel.text = String(meal.calories)
+  }
 
     
     //MARK: Actions
@@ -162,9 +164,6 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
           if let cell = sender as? MealCell,
             let indexPath = tableView.indexPath(for: cell){
             let meal = fetchedResultsController?.object(at: indexPath)
-//            let sectionCategory = sectionForMealIndex(indexPath.section) {
-//            let meal = mealList.mealSectionList(for: sectionCategory)[indexPath.row]
-
             destination?.delegate = self
             destination?.mealToEdit = meal
           }
@@ -173,51 +172,62 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
 
     func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: Meal) {
 
-        if let sectionCategory = sectionForMealIndex(Int(meal.category)) {
         appDelegate.saveContext()
         getMealLists()
         tableView.reloadData()
-        //meals.append(meal)
-//        tableView.beginUpdates()
-//          tableView.reloadSections(IndexSet(integer: IndexSet.Element(sectionCategory.rawValue)), with: .automatic)
-//        tableView.endUpdates()
-      }
+
         navigationController?.popViewController(animated: true)
     }
 
   func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: Meal, oldMealListItem: Meal ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
 
-//    guard let sections = fetchedResultsController?.sections
-//    
-//    for sectionCategory in MealCategory.allCases { // all Meal Categories
-//      let currentMeals = mealList.mealSectionList(for: sectionCategory) // array of meals in each meal category
-//      if let index = currentMeals.firstIndex(where: { $0.id == meal.id }) { // the index of the array of meals that has the same UUID as the meal being passed in from 
-//        let indexPath = IndexPath(row: index, section: newMealSectionIndex)
-//
-//        if oldMealSectionIndex == newMealSectionIndex {
-//          tableView.beginUpdates()
-//          tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .automatic)
-//          tableView.endUpdates()
-//        } else {
-//          if let sectionCategory = sectionForMealIndex(oldMealSectionIndex) {
-//            let currentMeals = mealList.mealSectionList(for: sectionCategory)
-//            if let index = currentMeals.firstIndex(where: { $0.id == oldMealListItem.id }) {
-//              let oldIndexPath = IndexPath(row: index, section: oldMealSectionIndex)
-//              mealList.meals.remove(at: index)
-//              mealList.meals.append(meal)
-//
-//              tableView.deleteRows(at: [oldIndexPath], with: .automatic)
-//            }
-//            tableView.beginUpdates()
-//            tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .automatic)
-//            tableView.endUpdates()
-//          }
-//        }
-//      }
-//    }
+    if oldMealSectionIndex == newMealSectionIndex {
+      appDelegate.saveContext()
+      getMealLists()
+      tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .fade)
+    } else {
+      appDelegate.saveContext()
+      getMealLists()
+      tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .fade)
+    }
   }
 }
 
-// Look into the below message. Warning after didFinishAdding function and new row was inserted.
-// 2020-04-14 18:55:08.648308-0400 TrackMyMeal[97036:13623309] [TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy (the table view or one of its superviews has not been added to a window). This may cause bugs by forcing views inside the table view to load and perform layout without accurate information (e.g. table view bounds, trait collection, layout margins, safe area insets, etc), and will also cause unnecessary performance overhead due to extra layout passes. Make a symbolic breakpoint at UITableViewAlertForLayoutOutsideViewHierarchy to catch this in the debugger and see what caused this to occur, so you can avoid this action altogether if possible, or defer it until the table view has been added to a window. Table view: <UITableView: 0x7fcc91820c00; frame = (0 0; 414 896); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray: 0x60000125d590>; layer = <CALayer: 0x600001c56980>; contentOffset: {0, -88}; contentSize: {414, 579.33333333333337}; adjustedContentInset: {88, 0, 34, 0}; dataSource: <TrackMyMeal.TrackMyMealTableViewController: 0x7fcc90407fa0>>
+extension TrackMyMealTableViewController: NSFetchedResultsControllerDelegate {
+  
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.beginUpdates()
+  }
+  
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    
+    switch type {
+    case .insert:
+      if let indexPath = newIndexPath {
+        tableView.insertRows(at: [indexPath], with: .fade)
+      }
+    case .delete:
+      if let indexPath = indexPath {
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      }
+    case .update:
+      if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+        configureCell(cell as! MealCell, at: indexPath)
+      }
+    case .move:
+      if let indexPath = indexPath {
+        tableView.deleteRows(at: [indexPath], with: .fade)
+      }
+      if let newIndexPath = newIndexPath {
+        tableView.insertRows(at: [newIndexPath], with: .fade)
+      }
+    default:
+      break
+    }
+  }
+  
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.endUpdates()
+  }
+}
 
