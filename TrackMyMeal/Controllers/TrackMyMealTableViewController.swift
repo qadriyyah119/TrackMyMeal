@@ -133,6 +133,7 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       context.delete(meal)
       appDelegate.saveContext()
       getMealLists()
+      self.showActivitySpinner()
       tableView.reloadData()
       //tableView.reloadSections(IndexSet(integer: IndexSet.Element(meal.category)), with: .automatic)
     }
