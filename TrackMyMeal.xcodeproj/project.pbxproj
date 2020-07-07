@@ -20,6 +20,7 @@
 		184C6B1A2416E6C600BD8399 /* MealListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B192416E6C600BD8399 /* MealListItem.swift */; };
 		184C6B1C2417250700BD8399 /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184C6B1B2417250700BD8399 /* MealCell.swift */; };
 		185A979C243641D000D704C7 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A979B243641CF00D704C7 /* SectionHeader.swift */; };
+		189C5A0724B3BFB3003308C8 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189C5A0624B3BFB3003308C8 /* ActivityIndicator.swift */; };
 		189DEDEC2450A77D00791165 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 189DEDEB2450A77D00791165 /* Colors.xcassets */; };
 		189DEDEF2450ABC000791165 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189DEDEE2450ABC000791165 /* UIViewShadowExtension.swift */; };
 		189DEDF12450AE8000791165 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189DEDF02450AE8000791165 /* Theme.swift */; };
@@ -49,6 +50,7 @@
 		184C6B192416E6C600BD8399 /* MealListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListItem.swift; sourceTree = "<group>"; };
 		184C6B1B2417250700BD8399 /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
 		185A979B243641CF00D704C7 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		189C5A0624B3BFB3003308C8 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		189DEDEB2450A77D00791165 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		189DEDEE2450ABC000791165 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewShadowExtension.swift; sourceTree = "<group>"; };
 		189DEDF02450AE8000791165 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				189DEDF82450F7E500791165 /* UINavigationTitleSettings.swift */,
 				18C71E802452075200409A34 /* UIButtonExtension.swift */,
 				18C71E8224521C8B00409A34 /* UIFloatingButtonExtension.swift */,
+				189C5A0624B3BFB3003308C8 /* ActivityIndicator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				184C6B162416E36D00BD8399 /* TrackMyMealTableViewController.swift in Sources */,
 				18C71E7F2452013B00409A34 /* AddNewMealPopupView.swift in Sources */,
+				189C5A0724B3BFB3003308C8 /* ActivityIndicator.swift in Sources */,
 				184C6B1A2416E6C600BD8399 /* MealListItem.swift in Sources */,
 				184C6B1C2417250700BD8399 /* MealCell.swift in Sources */,
 				18C71E8324521C8B00409A34 /* UIFloatingButtonExtension.swift in Sources */,

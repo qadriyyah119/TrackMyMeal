@@ -36,11 +36,14 @@ class AddNewMealViewController: UIViewController {
   @IBOutlet weak var mealNameTextField: UITextField!
   @IBOutlet weak var calorieTextField: UITextField!
 
+ 
   @IBOutlet var mealCategoryButtons: [UIButton]!
   
   override func viewDidLoad() {
       super.viewDidLoad()
       
+    
+    
     cancelButton.createFloatingActionButton()
     addButton.createFloatingActionButton()
     titleLabel.font = UIFont(name: Theme.titleFontName, size: 25)
@@ -87,6 +90,8 @@ class AddNewMealViewController: UIViewController {
   
   @IBAction func save(_ sender: Any) {
     
+    self.showActivitySpinner()
+    
     guard let mealCategory = self.mealCategory else { return }
     guard let calories = self.calorieTextField.text, let caloriesValue = Int(calories) else { return }
     guard let mealName = self.mealNameTextField.text else { return }
@@ -111,7 +116,9 @@ class AddNewMealViewController: UIViewController {
 
     delegate?.addNewMealViewController(self, didFinishAdding: mealListItem)
     }
+    
     dismiss(animated: true)
+    
   }
   
   @IBAction func calorieTextFieldKeyboard(_ sender: Any) {
