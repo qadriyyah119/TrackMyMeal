@@ -1,15 +1,18 @@
 //
-//  TrackMyMealTableViewController.swift
+//  TrackMyMealViewController.swift
 //  TrackMyMeal
 //
-//  Created by Qadriyyah Griffin on 3/9/20.
+//  Created by Qadriyyah Griffin on 7/27/20.
 //  Copyright © 2020 Qadriyyah Thomas. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDelegate {
+class TrackMyMealViewController: UIViewController {
+  
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var addMealButton: UIButton!
   
   private let appDelegate = UIApplication.shared.delegate as! AppDelegate
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -26,16 +29,20 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     
     super.init(coder: aDecoder)
   }
+  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-      tableView.addTableViewDesignSettings()
+
+      tableView.dataSource = self
+      tableView.delegate = self
       
       // Register my custom header view
       tableView.register(SectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
-        
+      
+      addMealButton.createFloatingActionButton()
     }
-    
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -59,17 +66,58 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     }
   }
   
+  @IBAction func addNewMeal(_ sender: Any) {
+    print("meal button pressed")
+  }
   
-    // MARK: - TableView DataSource
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if segue.identifier == "NewMealEntrySegue" {
+          let destination = segue.destination as? AddNewMealViewController
+          destination?.delegate = self
+      } else if segue.identifier == "EditMeal" {
+        let destination = segue.destination as? AddNewMealViewController
+        if let cell = sender as? MealCell,
+          let indexPath = self.tableView.indexPath(for: cell){
+          let meal = fetchedResultsController?.object(at: indexPath)
+          destination?.delegate = self
+          destination?.mealToEdit = meal
+        }
+    }
+  }
+
+  
+  
+}
+
+extension TrackMyMealViewController: UITableViewDataSource, UITableViewDelegate, AddNewMealViewDelegate {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
         
       return Int(MealCategory.allCases.count)
   
     }
-
   
-  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    let allMealsForSection = fetchedResultsController?
+      .fetchedObjects?
+      .filter { $0.category == section }
+    
+    return allMealsForSection?.count ?? 0
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealListCell", for: indexPath) as? MealCell else {
+            fatalError("Fatal Error Test")
+        }
+      
+      configureCell(cell, at: indexPath)
+        
+        return cell
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as? SectionHeader else {
       return nil
     }
@@ -87,41 +135,20 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
     
   }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-      let allMealsForSection = fetchedResultsController?
-        .fetchedObjects?
-        .filter { $0.category == section }
-      
-      return allMealsForSection?.count ?? 0
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealListCell", for: indexPath) as? MealCell else {
-            fatalError("Fatal Error Test")
-        }
-      
-      configureCell(cell, at: indexPath)
-        
-        return cell
-  }
   
-  
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
   }
 
-  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return true
   }
 
 
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       
       let allMealsForSection = fetchedResultsController?
@@ -148,53 +175,31 @@ class TrackMyMealTableViewController: UITableViewController, AddNewMealViewDeleg
       cell.mealTextLabel.text = meal.name
       cell.calorieLabel.text = String(meal.calories)
   }
+  
+      func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: Meal) {
 
-    
-    //MARK: Actions
-    
-    @IBAction func addMeal(_ sender: Any) {
-        print("Added Item")
-    }
+          appDelegate.saveContext()
+          getMealLists()
+        self.tableView.reloadData()
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "NewMealEntrySegue" {
-            let destination = segue.destination as? AddNewMealViewController
-            destination?.delegate = self
-        } else if segue.identifier == "EditMeal" {
-          let destination = segue.destination as? AddNewMealViewController
-          if let cell = sender as? MealCell,
-            let indexPath = tableView.indexPath(for: cell){
-            let meal = fetchedResultsController?.object(at: indexPath)
-            destination?.delegate = self
-            destination?.mealToEdit = meal
-          }
+          navigationController?.popViewController(animated: true)
       }
-    }
 
-    func addNewMealViewController(_ controller: AddNewMealViewController, didFinishAdding meal: Meal) {
+    func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: Meal, oldMealListItem: Meal ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
 
+      if oldMealSectionIndex == newMealSectionIndex {
         appDelegate.saveContext()
         getMealLists()
-        tableView.reloadData()
-
-        navigationController?.popViewController(animated: true)
-    }
-
-  func addNewMealViewController(_ controller: AddNewMealViewController, didFinishEditing meal: Meal, oldMealListItem: Meal ,oldMealSectionIndex: Int, newMealSectionIndex: Int) {
-
-    if oldMealSectionIndex == newMealSectionIndex {
-      appDelegate.saveContext()
-      getMealLists()
-      tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .fade)
-    } else {
-      appDelegate.saveContext()
-      getMealLists()
-      tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .fade)
+        tableView.reloadSections(IndexSet(integer: newMealSectionIndex), with: .fade)
+      } else {
+        appDelegate.saveContext()
+        getMealLists()
+        tableView.reloadSections(IndexSet(arrayLiteral: oldMealSectionIndex, newMealSectionIndex), with: .fade)
+      }
     }
   }
-}
 
-extension TrackMyMealTableViewController: NSFetchedResultsControllerDelegate {
+extension TrackMyMealViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.beginUpdates()
@@ -231,4 +236,3 @@ extension TrackMyMealTableViewController: NSFetchedResultsControllerDelegate {
     tableView.endUpdates()
   }
 }
-
