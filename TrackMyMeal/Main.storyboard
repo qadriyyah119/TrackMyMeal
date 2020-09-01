@@ -63,6 +63,104 @@
                                             <segue destination="Jbo-MD-atB" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="hYX-Pc-X0U"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WaterCell" rowHeight="75" id="I26-xD-bBX" customClass="WaterTrackerCell" customModule="TrackMyMeal" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I26-xD-bBX" id="b6z-60-0aN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="G0r-Z9-woY">
+                                                    <rect key="frame" x="20" y="11" width="374" height="53"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pn-VE-wBw">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="53" id="7cF-Vn-QMx"/>
+                                                                <constraint firstAttribute="width" constant="41" id="Cik-MW-3LO"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgZ-Ru-88Y">
+                                                            <rect key="frame" x="48" y="0.0" width="39.5" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="41" id="EkR-jw-6ho"/>
+                                                                <constraint firstAttribute="height" constant="53" id="eBy-6w-ODI"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQE-4Z-QwC">
+                                                            <rect key="frame" x="95.5" y="0.0" width="40" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="53" id="05d-nv-Az0"/>
+                                                                <constraint firstAttribute="width" constant="41" id="shK-AH-FbQ"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlS-HB-tz3">
+                                                            <rect key="frame" x="143.5" y="0.0" width="39.5" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="41" id="Kt0-ay-wMD"/>
+                                                                <constraint firstAttribute="height" constant="53" id="fvA-QC-dut"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-Th-M65">
+                                                            <rect key="frame" x="191" y="0.0" width="40" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="53" id="J20-5r-gdu"/>
+                                                                <constraint firstAttribute="width" constant="41" id="bdj-co-Ddg"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqa-hM-e33">
+                                                            <rect key="frame" x="239" y="0.0" width="39.5" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="41" id="gOp-7l-Od2"/>
+                                                                <constraint firstAttribute="height" constant="53" id="pOJ-GV-jr9"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsU-zo-m2t">
+                                                            <rect key="frame" x="286.5" y="0.0" width="40" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="53" id="FRR-aL-r8K"/>
+                                                                <constraint firstAttribute="width" constant="41" id="ZDG-UF-fnk"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEK-f1-aQP">
+                                                            <rect key="frame" x="334.5" y="0.0" width="39.5" height="53"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="53" id="8Pw-4e-df4"/>
+                                                                <constraint firstAttribute="width" constant="41" id="T8L-O7-bdH"/>
+                                                            </constraints>
+                                                            <state key="normal" backgroundImage="water"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="53" id="S5u-Pz-o4D"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="G0r-Z9-woY" firstAttribute="bottom" secondItem="b6z-60-0aN" secondAttribute="bottomMargin" id="Dxe-G5-8Sy"/>
+                                                <constraint firstItem="G0r-Z9-woY" firstAttribute="top" secondItem="b6z-60-0aN" secondAttribute="topMargin" id="a0i-rO-ils"/>
+                                                <constraint firstItem="G0r-Z9-woY" firstAttribute="leading" secondItem="b6z-60-0aN" secondAttribute="leadingMargin" id="co2-7p-MGQ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="G0r-Z9-woY" secondAttribute="trailing" id="kRL-7U-xlb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outletCollection property="waterButtons" destination="7pn-VE-wBw" collectionClass="NSMutableArray" id="OnS-hl-r0D"/>
+                                            <outletCollection property="waterButtons" destination="tgZ-Ru-88Y" collectionClass="NSMutableArray" id="mE3-i4-Hay"/>
+                                            <outletCollection property="waterButtons" destination="aQE-4Z-QwC" collectionClass="NSMutableArray" id="QAe-yd-Q7n"/>
+                                            <outletCollection property="waterButtons" destination="FlS-HB-tz3" collectionClass="NSMutableArray" id="dUG-9e-U7X"/>
+                                            <outletCollection property="waterButtons" destination="KUC-Th-M65" collectionClass="NSMutableArray" id="uCN-H7-qp7"/>
+                                            <outletCollection property="waterButtons" destination="iqa-hM-e33" collectionClass="NSMutableArray" id="GIY-MN-6bh"/>
+                                            <outletCollection property="waterButtons" destination="BsU-zo-m2t" collectionClass="NSMutableArray" id="HtS-sl-odu"/>
+                                            <outletCollection property="waterButtons" destination="AEK-f1-aQP" collectionClass="NSMutableArray" id="mO8-Qk-3Jh"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YPS-SI-Fnr">
@@ -293,6 +391,7 @@
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="water" width="364" height="486"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="Tint">
             <color red="0.99099999666213989" green="0.58600002527236938" blue="0.30399999022483826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
