@@ -32,7 +32,6 @@
 		18C71E812452075200409A34 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71E802452075200409A34 /* UIButtonExtension.swift */; };
 		18C71E8324521C8B00409A34 /* UIFloatingButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71E8224521C8B00409A34 /* UIFloatingButtonExtension.swift */; };
 		18F056BA24F5BD3C00247A22 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F056B924F5BD3C00247A22 /* DashboardViewController.swift */; };
-		18F056BC24F5D49100247A22 /* DashboardCalorieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F056BB24F5D49100247A22 /* DashboardCalorieCell.swift */; };
 		18FCE49B243BB89A00FE430B /* AddNewMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +63,6 @@
 		18C71E802452075200409A34 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		18C71E8224521C8B00409A34 /* UIFloatingButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFloatingButtonExtension.swift; sourceTree = "<group>"; };
 		18F056B924F5BD3C00247A22 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		18F056BB24F5D49100247A22 /* DashboardCalorieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCalorieCell.swift; sourceTree = "<group>"; };
 		18FCE49A243BB89A00FE430B /* AddNewMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMealViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,7 +135,6 @@
 				184C6B1B2417250700BD8399 /* MealCell.swift */,
 				185A979B243641CF00D704C7 /* SectionHeader.swift */,
 				18C71E7E2452013B00409A34 /* AddNewMealPopupView.swift */,
-				18F056BB24F5D49100247A22 /* DashboardCalorieCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -258,7 +255,6 @@
 				184C6B1C2417250700BD8399 /* MealCell.swift in Sources */,
 				18C71E8324521C8B00409A34 /* UIFloatingButtonExtension.swift in Sources */,
 				189DEDF12450AE8000791165 /* Theme.swift in Sources */,
-				18F056BC24F5D49100247A22 /* DashboardCalorieCell.swift in Sources */,
 				185A979C243641D000D704C7 /* SectionHeader.swift in Sources */,
 				18F056BA24F5BD3C00247A22 /* DashboardViewController.swift in Sources */,
 				189DEDF92450F7E500791165 /* UINavigationTitleSettings.swift in Sources */,
